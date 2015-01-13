@@ -20,9 +20,10 @@ class CreatePhrasesTable extends Migration {
             $table->string('locale');
             $table->string('key');
             $table->text('value');
+            $table->enum('aprove', array('0', '1'))->default('0');
             $table->timestamps();
 
-            $table->unique(array('locale', 'key'));
+            $table->unique(array('locale', 'key','aprove'));
         });
 	}
 

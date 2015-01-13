@@ -17,14 +17,14 @@ class LaraphraseController extends BaseController {
             $id       = Input::get('id');
             $newValue = Input::get('newValue');
 
-            $record = $class::find($id);
+            $record = $class::whereRaw('id = ? and aprove = 1', array($id))->get();
 
             if ( is_null($record) ) return Response::json(['status' => 'error', 'message' => 'Phrase is not exists!'], 403);
-
+            
             $record->fillable([$attribute]);
 
             $record->{$attribute} = $newValue;
-            $record->save();
+            $record->create(['locale'=>'en','key'=>$attribute,'value'=>$newValue]);
 
             return Response::json($record->toJson());
         }

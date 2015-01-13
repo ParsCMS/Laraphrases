@@ -17,7 +17,7 @@ class Phrase extends Model {
      *
      * @var array
      */
-    protected $fillable = ['locale', 'key', 'value'];
+    protected $fillable = ['locale', 'key', 'value','aprove'];
 
     /**
      * Find or create new model
@@ -31,11 +31,11 @@ class Phrase extends Model {
     {
         $locale = Config::get('app.locale');
 
-        $term = static::where('locale', $locale)->where('key', $key)->first();
+        $term = static::where('locale', $locale)->where('key', $key)->where('aprove', 1)->first();
 
         if ( is_null($term) )
         {
-            return static::create(['locale' => $locale, 'key' => $key, 'value' => $value]);
+            return static::create(['locale' => $locale, 'key' => $key, 'value' => $value,'aprove'=>1]);
         }
         return $term;
     }
