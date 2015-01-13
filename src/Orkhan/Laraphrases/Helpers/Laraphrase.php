@@ -56,5 +56,11 @@ class Laraphrase {
     {
         return self::getEditable($args[0], $args[1]);
     }
+    
+    
+    public static function getByKey($key)
+    {
+        return Phrase::where('key','=',$key)->where('aprove','=',0)->get();
+    }
 
 }
